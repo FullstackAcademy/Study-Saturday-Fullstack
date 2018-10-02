@@ -31476,6 +31476,7 @@ var Main = function (_Component) {
     };
 
     _this.selectStudent = _this.selectStudent.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
@@ -31533,6 +31534,13 @@ var Main = function (_Component) {
     value: function selectStudent(student) {
       return this.setState({
         selectedStudent: student
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(e) {
+      return this.setState({
+        showStudent: !this.state.showStudent
       });
     }
   }, {
@@ -32662,34 +32670,19 @@ var NewStudentForm = function (_Component) {
           "label",
           null,
           "First Name:",
-          _react2.default.createElement("input", {
-            type: "text",
-            name: "firstName",
-            onChange: this.handleChange,
-            value: this.state.firstName
-          })
+          _react2.default.createElement("input", { type: "text", name: "firstName" })
         ),
         _react2.default.createElement(
           "label",
           null,
           "Last Name:",
-          _react2.default.createElement("input", {
-            type: "text",
-            name: "lastName",
-            onChange: this.handleChange,
-            value: this.state.lastName
-          })
+          _react2.default.createElement("input", { type: "text", name: "lastName" })
         ),
         _react2.default.createElement(
           "label",
           null,
           "Email:",
-          _react2.default.createElement("input", {
-            type: "email",
-            name: "email",
-            onChange: this.handleChange,
-            value: this.state.email
-          })
+          _react2.default.createElement("input", { type: "email", name: "email" })
         ),
         _react2.default.createElement(
           "button",

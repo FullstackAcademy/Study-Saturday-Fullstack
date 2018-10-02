@@ -15,6 +15,7 @@ export default class Main extends Component {
     };
 
     this.selectStudent = this.selectStudent.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,12 @@ export default class Main extends Component {
   selectStudent(student) {
     return this.setState({
       selectedStudent: student,
+    });
+  }
+
+  handleClick(e) {
+    return this.setState({
+      showStudent: !this.state.showStudent,
     });
   }
 

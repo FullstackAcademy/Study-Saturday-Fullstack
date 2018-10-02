@@ -6,32 +6,17 @@ export default class NewStudentForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           First Name:
-          <input
-            type="text"
-            name="firstName"
-            onChange={this.handleChange}
-            value={this.state.firstName}
-          />
+          <input type="text" name="firstName" />
         </label>
 
         <label>
           Last Name:
-          <input
-            type="text"
-            name="lastName"
-            onChange={this.handleChange}
-            value={this.state.lastName}
-          />
+          <input type="text" name="lastName" />
         </label>
 
         <label>
           Email:
-          <input
-            type="email"
-            name="email"
-            onChange={this.handleChange}
-            value={this.state.email}
-          />
+          <input type="email" name="email" />
         </label>
 
         <button type="submit">Submit New Student</button>
