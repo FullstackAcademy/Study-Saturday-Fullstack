@@ -31476,8 +31476,6 @@ var Main = function (_Component) {
     };
 
     _this.selectStudent = _this.selectStudent.bind(_this);
-    _this.handleClick = _this.handleClick.bind(_this);
-    _this.addStudent = _this.addStudent.bind(_this);
     return _this;
   }
 
@@ -31535,19 +31533,6 @@ var Main = function (_Component) {
     value: function selectStudent(student) {
       return this.setState({
         selectedStudent: student
-      });
-    }
-  }, {
-    key: 'addStudent',
-    value: function addStudent(student) {
-      _axios2.default.post('/student', student);
-      this.getStudents();
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick(e) {
-      return this.setState({
-        showStudent: !this.state.showStudent
       });
     }
   }, {
@@ -32652,8 +32637,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32663,39 +32646,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var NewStudentForm = function (_Component) {
   _inherits(NewStudentForm, _Component);
 
-  function NewStudentForm(props) {
+  function NewStudentForm() {
     _classCallCheck(this, NewStudentForm);
 
-    var _this = _possibleConstructorReturn(this, (NewStudentForm.__proto__ || Object.getPrototypeOf(NewStudentForm)).call(this, props));
-
-    _this.state = {
-      firstName: "",
-      lastName: "",
-      email: ""
-    };
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (NewStudentForm.__proto__ || Object.getPrototypeOf(NewStudentForm)).apply(this, arguments));
   }
 
   _createClass(NewStudentForm, [{
-    key: "handleChange",
-    value: function handleChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(event) {
-      event.preventDefault();
-      this.props.addStudent(this.state);
-
-      this.setState({
-        firstName: "",
-        lastName: "",
-        email: ""
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
