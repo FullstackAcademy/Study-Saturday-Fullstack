@@ -32680,8 +32680,6 @@ var NewStudentForm = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      this.props.addStudent(this.state);
-
       this.setState({
         firstName: '',
         lastName: '',
