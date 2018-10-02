@@ -31560,7 +31560,7 @@ var Main = function (_Component) {
           { onClick: this.handleClick },
           'Add Student'
         ),
-        this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, { addStudent: this.addStudent }) : null,
+        this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, null) : null,
         _react2.default.createElement(
           'table',
           null,
