@@ -31477,7 +31477,6 @@ var Main = function (_Component) {
 
     _this.selectStudent = _this.selectStudent.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
-    _this.addStudent = _this.addStudent.bind(_this);
     return _this;
   }
 
@@ -31538,12 +31537,6 @@ var Main = function (_Component) {
       });
     }
   }, {
-    key: 'addStudent',
-    value: function addStudent(student) {
-      _axios2.default.post('/student', student);
-      this.getStudents();
-    }
-  }, {
     key: 'handleClick',
     value: function handleClick(e) {
       return this.setState({
@@ -31567,7 +31560,7 @@ var Main = function (_Component) {
           { onClick: this.handleClick },
           'Add Student'
         ),
-        this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, { addStudent: this.addStudent }) : null,
+        this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, null) : null,
         _react2.default.createElement(
           'table',
           null,
@@ -32669,9 +32662,9 @@ var NewStudentForm = function (_Component) {
     var _this = _possibleConstructorReturn(this, (NewStudentForm.__proto__ || Object.getPrototypeOf(NewStudentForm)).call(this, props));
 
     _this.state = {
-      firstName: "",
-      lastName: "",
-      email: ""
+      firstName: '',
+      lastName: '',
+      email: ''
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -32679,65 +32672,65 @@ var NewStudentForm = function (_Component) {
   }
 
   _createClass(NewStudentForm, [{
-    key: "handleChange",
+    key: 'handleChange',
     value: function handleChange(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
     }
   }, {
-    key: "handleSubmit",
+    key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
       this.props.addStudent(this.state);
 
       this.setState({
-        firstName: "",
-        lastName: "",
-        email: ""
+        firstName: '',
+        lastName: '',
+        email: ''
       });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "form",
+        'form',
         { onSubmit: this.handleSubmit },
         _react2.default.createElement(
-          "label",
+          'label',
           null,
-          "First Name:",
-          _react2.default.createElement("input", {
-            type: "text",
-            name: "firstName",
+          'First Name:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            name: 'firstName',
             onChange: this.handleChange,
             value: this.state.firstName
           })
         ),
         _react2.default.createElement(
-          "label",
+          'label',
           null,
-          "Last Name:",
-          _react2.default.createElement("input", {
-            type: "text",
-            name: "lastName",
+          'Last Name:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            name: 'lastName',
             onChange: this.handleChange,
             value: this.state.lastName
           })
         ),
         _react2.default.createElement(
-          "label",
+          'label',
           null,
-          "Email:",
-          _react2.default.createElement("input", {
-            type: "email",
-            name: "email",
+          'Email:',
+          _react2.default.createElement('input', {
+            type: 'email',
+            name: 'email',
             onChange: this.handleChange,
             value: this.state.email
           })
         ),
         _react2.default.createElement(
-          "button",
-          { type: "submit" },
-          "Submit New Student"
+          'button',
+          { type: 'submit' },
+          'Submit New Student'
         )
       );
     }
