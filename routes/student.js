@@ -17,28 +17,6 @@ router.get('/', function(req, res, next) {
   );
 });
 
-router.post('/', function(req, res, next) {
-  Student.create(req.body)
-    .then(studentNoTest => {
-      return Promise.all([
-        Test.create({
-          subject: 'Programming',
-          grade: 90,
-          studentId: studentNoTest.id,
-        }),
-        studentNoTest,
-      ]);
-    })
-    .then(([test, student]) => {
-      Student.findById(student.id, { include: { all: true } }).then(
-        foundStudent => {
-          res.json(foundStudent);
-        }
-      );
-    })
-    .catch(next);
-});
-
 router.put('/:id', function(req, res, next) {
   Student.update(req.body, {
     where: {
