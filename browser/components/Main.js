@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
+import { connect } from 'react-redux';
 import StudentList from './StudentList.js'
 import SingleStudent from './SingleStudent.js'
+import NewStudentForm from './NewStudentForm.js';
+import { toggleFormThunk, getStudentsThunk } from '../store';
 
-export default class Main extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      students: [],
-      selectedStudent: {}
-    }
-
-    this.selectStudent = this.selectStudent.bind(this)
+class Main extends Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
   }
+
   componentDidMount() {
-    this.getStudents()
+    this.props.getStudentsOnMount();
   }
-  getStudents() {
-    console.log("fetching")
-    axios.get('/student')
-      .then(res => this.setState({ students: res.data }))
-      .catch(console.error)
+
+  handleClick(e) {
+    this.props.toggleAddStudentForm();
   }
-  selectStudent(student) {
-    return this.setState({
-      selectedStudent: student
-    })
-  }
+
   render() {
     return (
-      <div>
+      <div style={{ position: 'absolute', top: '10%', left: '30%', marginRight: '-30%' }}>
         <h1>Students</h1>
+        <button onClick={this.handleClick}>Add a student</button>
+        {this.props.showForm ? (
+          <NewStudentForm />
+        ) : null}
         <table>
           <thead>
             <tr>
@@ -39,13 +34,25 @@ export default class Main extends Component {
               <th>Tests</th>
             </tr>
           </thead>
-          < StudentList students={this.state.students} selectStudent={this.selectStudent} />
+          < StudentList />
         </table>
         {
-          this.state.selectedStudent.id ? <SingleStudent student={this.state.selectedStudent} /> : null
+          this.props.studentDetails.id ? <SingleStudent /> : null
         }
-
       </div>
     )
   }
-}
+};
+
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleAddStudentForm: () => dispatch(toggleFormThunk()),
+    getStudentsOnMount: () => dispatch(getStudentsThunk())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

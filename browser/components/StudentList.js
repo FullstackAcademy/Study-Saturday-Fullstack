@@ -1,26 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { studentDetailsThunk } from '../store';
 
 const StudentList = (props) => {
-    console.log("p", props)
     return (
         <tbody>
-        {
-            props.students 
-            .map(student =>
-                (
-                    <tr key={student.id}>
-                        <td>
-                            {student.fullName}
+            {
+                props.students
+                    .map(student =>
+                        (
+                            <tr key={student.id}>
+                                <td>
+                                    {student.fullName}
+                                </td>
+                                <td onClick={() => props.studentDetails(student)}>
+                                    Details
                         </td>
-                        <td onClick= {() => props.selectStudent(student)}>
-                            Details
-                        </td>
-                    </tr>
-                )
-            )
-        }
+                            </tr>
+                        )
+                    )
+            }
         </tbody>
     )
 }
 
-export default StudentList
+const mapStateToProps = (state) => {
+    return {
+        students: state.students,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        studentDetails: (student) => dispatch(studentDetailsThunk(student)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList);
