@@ -2687,6 +2687,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+// without the middleware, you wouldn't
+// be able to make axios calls within our action creators
+
 
 var GET_ALL_STUDENTS = 'GET_ALL_STUDENTS';
 var STUDENT_DETAILS = 'STUDENT_DETAILS';
@@ -2735,6 +2738,8 @@ var getStudentsThunk = exports.getStudentsThunk = function getStudentsThunk() {
             case 3:
               response = _context.sent;
 
+              // makes the HTTP request from the browser
+              // building the request for you.
               dispatch(getStudentsActionCreator(response.data));
               _context.next = 10;
               break;
@@ -2743,7 +2748,14 @@ var getStudentsThunk = exports.getStudentsThunk = function getStudentsThunk() {
               _context.prev = 7;
               _context.t0 = _context['catch'](0);
 
+              // what should we do with errors in thunks?
               console.error(_context.t0);
+              // in express, it's more straightforward because
+              // you have access to next and do all error handling
+              // in middleware; more straightforward to always use next()
+              // the most you'll want to do for JPFP is console.error.
+              // depending on if there's a requirement for errors
+              // in production, might want to send error data to engineering team and display something formatted with user's experience in mind, like a friendly error message
 
             case 10:
             case 'end':
@@ -2786,19 +2798,22 @@ var submitStudentThunk = exports.submitStudentThunk = function submitStudentThun
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }();
+  }(); // invoking them in line; this time, the
+  // return of that invocation of your thunk is
+  // another function, which is what gets sent to dispatch
 };
 
 var studentDetailsThunk = exports.studentDetailsThunk = function studentDetailsThunk(student) {
   return function (dispatch) {
     dispatch(studentDetailsActionCreator(student));
   };
-};
+}; // not the best solution for bigger sets of data
+// google thunk alternatives
 
 var toggleFormThunk = exports.toggleFormThunk = function toggleFormThunk() {
   return function (dispatch) {
     dispatch(toggleFormActionCreator());
-  };
+  }; // dispatch is just the messenger
 };
 
 var initialState = {
@@ -2827,6 +2842,7 @@ var reducer = function reducer() {
 };
 
 exports.default = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+// hover-over in VS code
 
 /***/ }),
 /* 74 */
@@ -12471,11 +12487,21 @@ var _reactRedux = __webpack_require__(57);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// provides your main component access to the entire store;
+// ultimately giving access to all components
+
+
 _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
     { store: _store2.default },
     _react2.default.createElement(_Main2.default, null)
-), document.getElementById('app'));
+), // first arg is component, second arg is the DOM element where it goes
+document.getElementById('app')
+// replace that element with the Main component
+// default is index.html, since we haven't specified the name of document.  How would you specify the name of the specific document?
+);
+
+// we're not exporting anything
 
 /***/ }),
 /* 365 */
@@ -41078,6 +41104,14 @@ var Main = function (_Component) {
   function Main() {
     _classCallCheck(this, Main);
 
+    // state is outside of component unless it's
+    // the local state; props (properties of component)
+    // need to be passed down.
+    // both state and props can be passed down,
+    // but you can pass state down as props
+    // avoid passing state down as 'state' because
+    // it's confusing; we'd have props.state.
+    // you should pass the information on state down as props
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
     _this.handleClick = _this.handleClick.bind(_this);
@@ -41097,44 +41131,49 @@ var Main = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: { position: 'absolute', top: '10%', left: '30%', marginRight: '-30%' } },
+      // only for class components
+      // variable declaration, object destructuring
+
+      return (// always has return
         _react2.default.createElement(
-          'h1',
-          null,
-          'Students'
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.handleClick },
-          'Add a student'
-        ),
-        this.props.showForm ? _react2.default.createElement(_NewStudentForm2.default, null) : null,
-        _react2.default.createElement(
-          'table',
-          null,
+          'div',
+          { style: { position: 'absolute', top: '10%', left: '30%', marginRight: '-30%' } },
           _react2.default.createElement(
-            'thead',
+            'h1',
+            null,
+            'Students'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handleClick },
+            'Add a student'
+          ),
+          this.props.showForm ? _react2.default.createElement(_NewStudentForm2.default, null) : null,
+          _react2.default.createElement(
+            'table',
             null,
             _react2.default.createElement(
-              'tr',
+              'thead',
               null,
               _react2.default.createElement(
-                'th',
+                'tr',
                 null,
-                'Name'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                'Tests'
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Name'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Tests'
+                )
               )
-            )
+            ),
+            _react2.default.createElement(_StudentList2.default, null)
           ),
-          _react2.default.createElement(_StudentList2.default, null)
-        ),
-        this.props.studentDetails.id ? _react2.default.createElement(_SingleStudent2.default, null) : null
+          this.props.studentDetails.id ? _react2.default.createElement(_SingleStudent2.default, null) : null
+        )
       );
     }
   }]);
@@ -43914,7 +43953,12 @@ var SingleStudent = function SingleStudent(props) {
         _react2.default.createElement(
             'em',
             null,
-            'Email: ',
+            _react2.default.createElement(
+                'b',
+                null,
+                'Email:'
+            ),
+            ' ',
             props.student.email
         ),
         _react2.default.createElement(
@@ -44088,16 +44132,33 @@ var NewStudentForm = function (_Component) {
 
   return NewStudentForm;
 }(_react.Component);
+// // convention
+// const varname = (something) => {
+//   return {
+//     submitStudent: (student) => something(submitStudentThunk(student)),
+//   }
+// }
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    // On line 26: basically passing in this.state as the student argument.
+
     submitStudent: function submitStudent(student) {
       return dispatch((0, _store.submitStudentThunk)(student));
     }
   };
-};
+}; // redux store is listening to the payload of that dispatch
+// (whether it's a function / object)
 
+// if a thunk were a package, and a normal action were the
+// letter, dispatch would be the mailbox; it delivers whatever
+// you pass in to the redux store.
+
+
+// export default connect(null, mapDispatchToProps)(NewStudentForm);
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(NewStudentForm);
+
+// for regular exports, the names have to match because it's not default
 
 /***/ })
 /******/ ]);

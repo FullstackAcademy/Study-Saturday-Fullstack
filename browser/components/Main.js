@@ -7,7 +7,14 @@ import { toggleFormThunk, getStudentsThunk } from '../store';
 
 class Main extends Component {
   constructor() {
-    super();
+    super(); // state is outside of component unless it's
+    // the local state; props (properties of component)
+    // need to be passed down.
+    // both state and props can be passed down,
+    // but you can pass state down as props
+    // avoid passing state down as 'state' because
+    // it's confusing; we'd have props.state.
+    // you should pass the information on state down as props
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -19,14 +26,18 @@ class Main extends Component {
     this.props.toggleAddStudentForm();
   }
 
-  render() {
-    return (
+  render() { // only for class components
+    // variable declaration, object destructuring
+
+    return ( // always has return
       <div style={{ position: 'absolute', top: '10%', left: '30%', marginRight: '-30%' }}>
         <h1>Students</h1>
         <button onClick={this.handleClick}>Add a student</button>
+        {/* bootstrap for passing down CSS as props */}
         {this.props.showForm ? (
           <NewStudentForm />
         ) : null}
+        {/* conditionally rendered based on Redux's state.showForm */}
         <table>
           <thead>
             <tr>

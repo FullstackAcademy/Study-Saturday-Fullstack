@@ -12,7 +12,7 @@ const avgGrade = tests => {
 const SingleStudent = (props) => {
     return (<div>
         <h3>{props.student.fullName}</h3>
-        <em>Email: {props.student.email}</em>
+        <em><b>Email:</b> {props.student.email}</em>
         <h3>Average grade: {avgGrade(props.student.tests)}%</h3>
         <div>
             <table>

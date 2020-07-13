@@ -16,16 +16,17 @@ app.use(morgan('dev'));
 app.use('/student', Student);
 app.use('/test', Test);
 
+// for any static files, refer to the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
 db.sync()
   .then(() =>
-    app.listen(3000, function() {
+    app.listen(3000, function () {
       console.log('Server is listening on port 3000!');
     })
   )

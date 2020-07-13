@@ -2,6 +2,9 @@
 
 module.exports = {
   // Compile ./browser/index.js
+  // this is what triggers line 11 on browser > index.js
+  // translate all of this stuff to regular JavaScript,
+  // starting with index.js
   entry: ['babel-polyfill', './browser/index.js'],
   output: {
     path: __dirname,

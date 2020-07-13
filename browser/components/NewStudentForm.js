@@ -53,11 +53,29 @@ class NewStudentForm extends Component {
     );
   }
 }
+// // convention
+// const varname = (something) => {
+//   return {
+//     submitStudent: (student) => something(submitStudentThunk(student)),
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // On line 26: basically passing in this.state as the student argument.
+
     submitStudent: (student) => dispatch(submitStudentThunk(student)),
   };
-};
+}; // redux store is listening to the payload of that dispatch
+// (whether it's a function / object)
 
+// if a thunk were a package, and a normal action were the
+// letter, dispatch would be the mailbox; it delivers whatever
+// you pass in to the redux store.
+
+
+// export default connect(null, mapDispatchToProps)(NewStudentForm);
 export default connect(null, mapDispatchToProps)(NewStudentForm);
+
+// for regular exports, the names have to match because it's not default
+
