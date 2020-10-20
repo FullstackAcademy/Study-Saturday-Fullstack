@@ -1,10 +1,9 @@
-# Study-Saturday-Fullstack
+# Study Saturdays: Week 4 - Fullstack Flow
 
 ## Objective: Build a form to add new students to our app
 
 ### Details
 
-- [ ] Create a `POST` route for adding a new student
 - [ ] Front end should consist of a table view of all students
 - [ ] Clicking on a student should show a detailed view of that individual student's test scores
 - [ ] Front end should also include a form for adding new student
@@ -14,7 +13,7 @@
 1. fork and `git clone`
 2. `npm install`
 3. `npm run seed`
-4. `git checkout cycle-0`
+4. `git checkout cycle-1`
 
 #### Tips
 
