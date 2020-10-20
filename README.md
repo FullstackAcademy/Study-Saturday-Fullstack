@@ -1,12 +1,14 @@
-# Study Saturdays: Week 4 - Fullstack Flow (Cycle 2)
+# Study Saturdays: Week 4 - Fullstack Flow (Cycle 3)
 
 ## **Objective:** Build a form to add new students to our app
 
 ### Steps
 
-- In the `NewStudentForm` component, do the following:
-  - [ ] Add a local state (you will have to determine the necessary data we will need to house in `this.state`)
-  - [ ] Add a `handleChange` method that will update the `state` according to the form's input
-  - [ ] Add a `handleSubmit` method that will take the data from `state` and ***do*** something with it (you can surmise what that something is) ***and*** clear the `state` (and thus the form)
+- In `Main.js`
+  - [ ] Add a method called "`addStudent`" that creates a new student in the database given an object (the information collected on `state` inside the `NewStudentForm` component) by making an `axios` request to the `POST` route created in Cycle 0
+  - [ ] The `addStudent` method should also update the `state` (you can surmise specifically what in `state`)
+  - [ ] Pass this method as a `prop` to the `NewStudentForm` component
+- In `NewStudentForm.js`
+  - [ ] Use the `addStudent` method from `props` in the `handleSubmit`
 - [ ] Once done and tested, `git checkout cycle-3`
 
