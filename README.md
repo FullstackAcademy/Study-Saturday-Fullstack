@@ -1,22 +1,10 @@
-# Study Saturdays: Week 4 - Fullstack Flow
+# Study Saturdays: Week 4 - Fullstack Flow (Cycle 0)
 
-## Objective: Build a form to add new students to our app
+## **Objective:** Build a form to add new students to our app
 
-### Details
+### Steps
 
-- [ ] Create a `POST` route for adding a new student
-- [ ] Front end should consist of a table view of all students
-- [ ] Clicking on a student should show a detailed view of that individual student's test scores
-- [ ] Front end should also include a form for adding new student
+- [ ] Create a POST route for adding a new student
+  - See `server/routes/students.js`
+- [ ] Once done and tested, `git checkout cycle-1`
 
-### Getting Started
-
-- [x] fork and `git clone`
-- [x] `npm install`
-- [x] `npm run seed`
-- [ ] `git checkout cycle-0`
-
-#### Tips
-
-- Form components should be "smart" and have their own state
-- Make sure form field values are "controlled" by the component's state
