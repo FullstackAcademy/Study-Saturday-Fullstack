@@ -10,5 +10,5 @@
   - [ ] Pass this method as a `prop` to the `NewStudentForm` component
 - In `NewStudentForm.js`
   - [ ] Use the `addStudent` method from `props` in the `handleSubmit`
-- [ ] Once done and tested, `git checkout cycle-3`
+- [ ] Once done and tested, `git checkout cycle-4` (bonus)
 
