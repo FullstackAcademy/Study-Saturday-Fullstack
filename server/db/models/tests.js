@@ -15,7 +15,7 @@ const Test = db.define('test', {
   }
 });
 
-Test.passing = function() {
+Test.getPassing = function () {
   return Test.findAll({
     where: {
       grade: {
@@ -25,7 +25,7 @@ Test.passing = function() {
   });
 };
 
-Test.findBySubject = function(type) {
+Test.findBySubject = function (type) {
   return Test.findAll({
     where: {
       subject: type
