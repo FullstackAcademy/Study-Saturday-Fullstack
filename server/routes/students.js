@@ -25,7 +25,6 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST /api/students
-// --- Cycle 0: add code below ---
 router.post('/', async (req, res, next) => {
   try {
     const { firstName, lastName, email } = req.body;
@@ -43,7 +42,6 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
-// --- Cycle 0: add code above ---
 
 // PUT /api/students/:id
 router.put('/:id', async (req, res, next) => {
