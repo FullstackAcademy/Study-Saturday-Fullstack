@@ -1,6 +1,7 @@
 # Study Saturdays: Week 4 - Fullstack Flow (Cycle 0)
 
 ## **Objective:** Build a form to add new students to our app
+- **Cycle 0:** Create a route for adding students
 
 ### Steps
 
