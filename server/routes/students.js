@@ -29,11 +29,15 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { firstName, lastName, email } = req.body;
-    let student = await Student.create({
-      firstName,
-      lastName,
-      email
-    });
+    let student = await Student.create(
+      {
+        firstName,
+        lastName,
+        email
+      },
+      { include: { all: true } }
+    );
+    student = await student.reload()
     res.json(student);
   } catch (error) {
     next(error);
