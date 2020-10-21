@@ -22,7 +22,7 @@ export default class NewStudentForm extends Component {
       e.preventDefault()
       // Send POST HTTP request to create student on the server side
       const studentInfo = this.state
-      const { data: student } = await axios.post('/api/students', studentInfo)
+      this.props.addStudent(studentInfo)
 
       // Clear state/form
       this.setState({

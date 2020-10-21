@@ -43,6 +43,17 @@ export default class Main extends Component {
     });
   };
 
+  addStudent = async (studentInfo) => {
+    try {
+      const { data: student } = await axios.post('/api/students', studentInfo)
+      this.setState({
+        students: [ ...this.state.students, student ]
+      })
+    } catch (error) {
+      alert('Error adding student. Please try again.')
+    }
+  }
+
   render() {
     const { displayForm } = this.state;
 
@@ -50,7 +61,7 @@ export default class Main extends Component {
       <div>
         <h1>Students</h1>
         <button onClick={this.toggleForm}>Add New Student</button>
-        {displayForm ? <NewStudentForm /> : ''}
+        {displayForm ? <NewStudentForm addStudent={this.addStudent} /> : ''}
         <table>
           <thead>
             <tr>
