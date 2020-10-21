@@ -37,7 +37,7 @@ router.post('/', async (req, res, next) => {
       },
       { include: { all: true } }
     );
-    student = await student.reload()
+    student = await student.reload();
     res.json(student);
   } catch (error) {
     next(error);
