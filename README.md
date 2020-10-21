@@ -24,3 +24,4 @@
       - Reducer
   - [ ] `connect` the `Main` component using `react-redux` mapping all the necessary pieces of `state` and Redux creators to `props`
     - Refactor throughout (e.g. `this.props` _instead of_ `this.state`)
+  - [ ] Test functionality!
