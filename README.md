@@ -1,6 +1,7 @@
 # Study Saturdays: Week 4 - Fullstack Flow (Cycle 2)
 
 ## **Objective:** Build a form to add new students to our app
+- **Cycle 2:** Update `state` with form input
 
 ### Steps
 
