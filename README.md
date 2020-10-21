@@ -9,5 +9,18 @@
 
 ### Steps
 
-- [ ] Refactor the code base to incorporate Redux and React-Redux
-
+- Refactor the code base to incorporate Redux and React-Redux
+  - [ ] Install the following dependencies: `redux`, `react-redux`, `redux-thunk`, `redux-logger`
+  - [ ] Wrap your application in `Provider` (`/browser/index.js`)
+  - [ ] Create a `store.js` file within the `/browser` directory
+    - Use `createStore` and `applyMiddleware` from `redux`
+    - Feed `applyMiddleware` `loggingMiddleware` from `redux-logger` and `thunkMiddleware` from `redux-thunk`
+  - [ ] Create `/browser/reducers/index.js`
+    - Account for all of the actions in our `Main` component
+      - Action Types (e.g. `'STUDENTS_RECEIVED'`, `'STUDENT_RECEIVED'`, `'STUDENT_SELECTED'`)
+      - Action Creators
+      - Thunk Creators
+      - Initial State
+      - Reducer
+  - [ ] `connect` the `Main` component using `react-redux` mapping all the necessary pieces of `state` and Redux creators to `props`
+    - Refactor throughout (e.g. `this.props` _instead of_ `this.state`)
