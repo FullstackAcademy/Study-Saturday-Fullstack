@@ -43,34 +43,37 @@ export default class NewStudentForm extends Component {
         <label>
           First Name:
           <input
+            required
             onChange={this.handleChange}
-            type='text'
+            type="text"
             value={firstName}
-            name='firstName'
+            name="firstName"
           />
         </label>
 
         <label>
           Last Name:
           <input
+            required
             onChange={this.handleChange}
-            type='text'
+            type="text"
             value={lastName}
-            name='lastName'
+            name="lastName"
           />
         </label>
 
         <label>
           Email:
           <input
+            required
             onChange={this.handleChange}
-            type='email'
+            type="email"
             value={email}
-            name='email'
+            name="email"
           />
         </label>
 
-        <button type='submit'>Submit New Student</button>
+        <button type="submit">Submit New Student</button>
       </form>
     );
   }
