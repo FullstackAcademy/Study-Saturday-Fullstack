@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
         lastName,
         email
       },
-      { include: { all: true } }
+      { include: Test }
     );
     student = await student.reload()
     res.json(student);
