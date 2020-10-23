@@ -50,7 +50,7 @@ export default class Main extends Component {
       <div>
         <h1>Students</h1>
         <button onClick={this.toggleForm}>Add New Student</button>
-        {displayForm ? <NewStudentForm /> : ''}
+        {displayForm ? <NewStudentForm /> : null}
         <table>
           <thead>
             <tr>
