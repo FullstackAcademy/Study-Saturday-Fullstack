@@ -9,31 +9,30 @@ export default class Main extends Component {
     super(props);
     this.state = {
       students: [],
-      selectedStudent: {},
+      selectedStudent: {}
     };
-
-    this.selectStudent = this.selectStudent.bind(this);
   }
 
   componentDidMount() {
     this.getStudents();
   }
 
-  async getStudents() {
-    console.log('fetching');
+  getStudents = async () => {
     try {
-      const { data } = await axios.get('/student');
-      this.setState({ students: data });
-    } catch (err) {
-      console.error(err);
+      const { data: students } = await axios.get('/api/students');
+      this.setState({
+        students
+      });
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
 
-  selectStudent(student) {
+  selectStudent = (student) => {
     return this.setState({
-      selectedStudent: student,
+      selectedStudent: student
     });
-  }
+  };
 
   render() {
     return (
