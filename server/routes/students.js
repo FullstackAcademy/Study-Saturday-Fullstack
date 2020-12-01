@@ -24,6 +24,9 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// POST /api/students
+
+
 // PUT /api/students/:id
 router.put('/:id', async (req, res, next) => {
   try {
