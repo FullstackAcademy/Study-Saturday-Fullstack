@@ -6,17 +6,17 @@ export default class NewStudentForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           First Name:
-          <input type="text" name="firstName" />
+          <input required type="text" name="firstName" />
         </label>
 
         <label>
           Last Name:
-          <input type="text" name="lastName" />
+          <input required type="text" name="lastName" />
         </label>
 
         <label>
           Email:
-          <input type="email" name="email" />
+          <input required type="email" name="email" />
         </label>
 
         <button type="submit">Submit New Student</button>
