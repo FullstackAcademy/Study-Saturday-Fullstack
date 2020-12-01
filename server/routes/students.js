@@ -24,6 +24,25 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// POST /api/students
+router.post('/', async (req, res, next) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+    let student = await Student.create(
+      {
+        firstName,
+        lastName,
+        email
+      },
+      { include: Test }
+    );
+    student = await student.reload();
+    res.json(student);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // PUT /api/students/:id
 router.put('/:id', async (req, res, next) => {
   try {

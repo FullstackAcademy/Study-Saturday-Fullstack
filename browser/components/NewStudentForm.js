@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class NewStudentForm extends Component {
   constructor(props) {
@@ -6,56 +7,69 @@ export default class NewStudentForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: '',
+      email: ''
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (e) => {
     this.setState({
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value
     });
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-    });
-  }
+  };
+
+  handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      // Send POST HTTP request to create student on the server side
+      const studentInfo = this.state;
+      const { data: student } = await axios.post('/api/students', studentInfo);
+
+      // Clear state/form
+      this.setState({
+        firstName: '',
+        lastName: '',
+        email: ''
+      });
+    } catch (error) {
+      alert('Error adding student. Please try again.');
+    }
+  };
 
   render() {
+    const { firstName, lastName, email } = this.state;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           First Name:
           <input
-            type="text"
-            name="firstName"
+            required
             onChange={this.handleChange}
-            value={this.state.firstName}
+            type="text"
+            value={firstName}
+            name="firstName"
           />
         </label>
 
         <label>
           Last Name:
           <input
-            type="text"
-            name="lastName"
+            required
             onChange={this.handleChange}
-            value={this.state.lastName}
+            type="text"
+            value={lastName}
+            name="lastName"
           />
         </label>
 
         <label>
           Email:
           <input
-            type="email"
-            name="email"
+            required
             onChange={this.handleChange}
-            value={this.state.email}
+            type="email"
+            value={email}
+            name="email"
           />
         </label>
 
