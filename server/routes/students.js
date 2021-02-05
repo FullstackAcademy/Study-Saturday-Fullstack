@@ -5,7 +5,7 @@ const { Student, Test } = require('../db/models');
 router.get('/', async (req, res, next) => {
   try {
     const students = await Student.findAll({
-      include: Test
+      include: Test,
     });
     res.json(students);
   } catch (error) {
@@ -32,11 +32,11 @@ router.post('/', async (req, res, next) => {
       {
         firstName,
         lastName,
-        email
+        email,
       },
       { include: Test }
     );
-    student = await student.reload();
+    student = await student.reload(); //The reload call generates a SELECT query to get the up-to-date data from the database
     res.json(student);
   } catch (error) {
     next(error);
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res, next) => {
     const updatedStudent = await student.update({
       firstName,
       lastName,
-      email
+      email,
     });
     res.json(updatedStudent);
   } catch (error) {
