@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class NewStudentForm extends Component {
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
           First Name:
           <input required type="text" name="firstName" />
