@@ -1,59 +1,43 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import StudentList from './StudentList.js';
-import SingleStudent from './SingleStudent.js';
+import StudentList from "./StudentList.js";
+import SingleStudent from "./SingleStudent.js";
 
-export default class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      students: [],
-      selectedStudent: {}
-    };
-  }
+const Main = (props) => {
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState({});
 
-  componentDidMount() {
-    this.getStudents();
-  }
+  useEffect(() => getStudents(), []);
 
-  getStudents = async () => {
+  const getStudents = async () => {
     try {
-      const { data: students } = await axios.get('/api/students');
-      this.setState({
-        students
-      });
+      const { data: students } = await axios.get("/api/students");
+      setStudents(students);
     } catch (error) {
       console.error(error);
     }
   };
 
-  selectStudent = (student) => {
-    return this.setState({
-      selectedStudent: student
-    });
+  const selectStudent = (student) => {
+    return setSelectedStudent(student);
   };
 
-  render() {
-    return (
-      <div>
-        <h1>Students</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Tests</th>
-            </tr>
-          </thead>
-          <StudentList
-            students={this.state.students}
-            selectStudent={this.selectStudent}
-          />
-        </table>
-        {this.state.selectedStudent.id ? (
-          <SingleStudent student={this.state.selectedStudent} />
-        ) : null}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Students</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tests</th>
+          </tr>
+        </thead>
+        <StudentList students={students} selectStudent={selectStudent} />
+      </table>
+      {selectedStudent.id ? <SingleStudent student={selectedStudent} /> : null}
+    </div>
+  );
+};
+
+export default Main;
