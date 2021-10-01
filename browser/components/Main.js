@@ -1,33 +1,34 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import StudentList from "./StudentList.js"
-import SingleStudent from "./SingleStudent.js"
-import NewStudentForm from "./NewStudentForm"
+import StudentList from "./StudentList.js";
+import SingleStudent from "./SingleStudent.js";
+import NewStudentForm from "./NewStudentForm";
 
 const Main = (props) => {
-  const [students, setStudents] = useState([])
-  const [selectedStudent, setSelectedStudent] = useState({})
-  const [displayForm, setDisplayForm] = useState(false)
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState({});
+  const [displayForm, setDisplayForm] = useState(false);
 
-  useEffect(() => getStudents(), [])
-
-  const getStudents = async () => {
-    try {
-      const { data: students } = await axios.get("/api/students")
-      setStudents(students)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        const { data: students } = await axios.get("/api/students");
+        setStudents(students);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getStudents();
+  }, []);
 
   const selectStudent = (student) => {
-    return setSelectedStudent(student)
-  }
+    return setSelectedStudent(student);
+  };
 
   const toggleForm = () => {
-    setDisplayForm(!displayForm)
-  }
+    setDisplayForm(!displayForm);
+  };
 
   return (
     <div>
@@ -45,7 +46,7 @@ const Main = (props) => {
       </table>
       {selectedStudent.id ? <SingleStudent student={selectedStudent} /> : null}
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
