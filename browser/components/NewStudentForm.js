@@ -2,36 +2,41 @@ import axios from "axios";
 import React, { useReducer, useState } from "react";
 
 const NewStudentForm = () => {
-  const [studentInfo, setStudentInfo] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      firstName: "",
-      lastName: "",
-      email: "",
-    }
-  );
+  // this method will give students practice setting useState, but for a more industry accepted version, checkout cycle-3-useReducer
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleChange = (evt) => {
-    const name = evt.target.name;
+  const handleFirstNameChange = (evt) => {
     const newValue = evt.target.value;
+    setFirstName(newValue);
+  };
 
-    setStudentInfo({ [name]: newValue });
+  const handleLastNameChange = (evt) => {
+    const newValue = evt.target.value;
+    setLastName(newValue);
+  };
+
+  const handleEmailChange = (evt) => {
+    const newValue = evt.target.value;
+    setEmail(newValue);
   };
 
   const handleSubmit = async (evt) => {
     try {
       evt.preventDefault();
-      const studentInfoPackage = studentInfo;
+      const studentInfoPackage = {
+        firstName,
+        lastName,
+        email,
+      };
       const { data: student } = await axios.post(
         "/api/students",
         studentInfoPackage
       );
-
-      setStudentInfo({
-        firstName: "",
-        lastName: "",
-        email: "",
-      });
+      setFirstName("");
+      setLastName("");
+      setEmail("");
     } catch (error) {
       alert("Error adding student. Please try again.");
     }
@@ -45,8 +50,8 @@ const NewStudentForm = () => {
           required
           type="text"
           name="firstName"
-          value={studentInfo.firstName}
-          onChange={handleChange}
+          value={firstName}
+          onChange={handleFirstNameChange}
         />
       </label>
 
@@ -56,8 +61,8 @@ const NewStudentForm = () => {
           required
           type="text"
           name="lastName"
-          value={studentInfo.lastName}
-          onChange={handleChange}
+          value={lastName}
+          onChange={handleLastNameChange}
         />
       </label>
 
@@ -67,8 +72,8 @@ const NewStudentForm = () => {
           required
           type="email"
           name="email"
-          value={studentInfo.email}
-          onChange={handleChange}
+          value={email}
+          onChange={handleEmailChange}
         />
       </label>
 
