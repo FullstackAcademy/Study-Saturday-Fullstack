@@ -1,68 +1,53 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchStudents, createStudent, studentSelected } from '../reducers';
-import StudentList from './StudentList.js';
-import SingleStudent from './SingleStudent.js';
-import NewStudentForm from './NewStudentForm';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchStudents,
+  studentSelected,
+  createStudent,
+} from "../reducers/index.js";
+import StudentList from "./StudentList.js";
+import SingleStudent from "./SingleStudent.js";
+import NewStudentForm from "./NewStudentForm";
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayForm: false
-    };
-  }
+const Main = (props) => {
+  const [displayForm, setDisplayForm] = useState(false);
+  const students = useSelector((state) => state.students);
+  const selectedStudent = useSelector((state) => state.selectedStudent);
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    this.props.fetchStudents();
-  }
+  useEffect(() => {
+    dispatch(fetchStudents());
+  }, []);
 
-  toggleForm = () => {
-    const currentState = this.state.displayForm;
-    this.setState({
-      displayForm: !currentState
-    });
+  const selectStudent = (student) => {
+    dispatch(studentSelected(student));
   };
 
-  render() {
-    const { displayForm } = this.state;
+  const toggleForm = () => {
+    setDisplayForm(!displayForm);
+  };
 
-    return (
-      <div>
-        <h1>Students</h1>
-        <button onClick={this.toggleForm}>Add New Student</button>
-        {displayForm ? (
-          <NewStudentForm addStudent={this.props.createStudent} />
-        ) : null}
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Tests</th>
-            </tr>
-          </thead>
-          <StudentList
-            students={this.props.students}
-            selectStudent={this.props.selectStudent}
-          />
-        </table>
-        {this.props.selectedStudent.id ? (
-          <SingleStudent student={this.props.selectedStudent} />
-        ) : null}
-      </div>
-    );
-  }
-}
+  const addStudent = (studentInfo) => {
+    dispatch(createStudent(studentInfo));
+  };
 
-const mapStateToProps = (state) => ({
-  students: state.students,
-  selectedStudent: state.selectedStudent
-});
+  return (
+    <div>
+      <h1>Students</h1>
+      <button onClick={toggleForm}>Add New Student</button>
+      {displayForm ? <NewStudentForm addStudent={addStudent} /> : null}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tests</th>
+          </tr>
+        </thead>
+        <StudentList students={students} selectStudent={selectStudent} />
+      </table>
+      {selectedStudent.id ? <SingleStudent student={selectedStudent} /> : null}
+    </div>
+  );
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchStudents: () => dispatch(fetchStudents()),
-  createStudent: (studentInfo) => dispatch(createStudent(studentInfo)),
-  selectStudent: (student) => dispatch(studentSelected(student))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
