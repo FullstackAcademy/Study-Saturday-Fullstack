@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { useReducer } from "react";
 
-const NewStudentForm = () => {
+const NewStudentForm = (props) => {
+  const { addStudent } = props;
   const [studentInfo, setStudentInfo] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -14,19 +14,15 @@ const NewStudentForm = () => {
   const handleChange = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
-
     setStudentInfo({ [name]: newValue });
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (evt) => {
     try {
-      e.preventDefault();
+      evt.preventDefault();
       // Send POST HTTP request to create student on the server side
       const studentInfoPackage = studentInfo;
-      const { data: student } = await axios.post(
-        "/api/students",
-        studentInfoPackage
-      );
+      addStudent(studentInfoPackage);
 
       // Clear state/form
       setStudentInfo({

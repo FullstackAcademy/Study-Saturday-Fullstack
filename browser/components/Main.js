@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import StudentList from "./StudentList.js";
 import SingleStudent from "./SingleStudent.js";
 import NewStudentForm from "./NewStudentForm";
@@ -23,24 +22,24 @@ const Main = (props) => {
   }, []);
 
   const selectStudent = (student) => {
-    return setSelectedStudent(student);
+    setSelectedStudent(student);
   };
 
   const toggleForm = () => {
     setDisplayForm(!displayForm);
   };
 
-  addStudent = async (studentInfo) => {
+  const addStudent = async (studentInfo) => {
     try {
       const { data: student } = await axios.post("/api/students", studentInfo);
-      this.setState({
-        students: [...this.state.students, student],
-      });
+      console.log(student);
+      setStudents([...students, student]);
     } catch (error) {
       alert("Error adding student. Please try again.");
     }
   };
 
+  // console.log("students here", students);
   return (
     <div>
       <h1>Students</h1>
