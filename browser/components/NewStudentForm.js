@@ -1,35 +1,39 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 
 const NewStudentForm = (props) => {
   const { addStudent } = props;
-  const [studentInfo, setStudentInfo] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      firstName: "",
-      lastName: "",
-      email: "",
-    }
-  );
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleChange = (evt) => {
-    const name = evt.target.name;
+  const handleFirstNameChange = (evt) => {
     const newValue = evt.target.value;
-    setStudentInfo({ [name]: newValue });
+    setFirstName(newValue);
+  };
+
+  const handleLastNameChange = (evt) => {
+    const newValue = evt.target.value;
+    setLastName(newValue);
+  };
+
+  const handleEmailChange = (evt) => {
+    const newValue = evt.target.value;
+    setEmail(newValue);
   };
 
   const handleSubmit = async (evt) => {
     try {
       evt.preventDefault();
-      // Send POST HTTP request to create student on the server side
-      const studentInfoPackage = studentInfo;
-      addStudent(studentInfoPackage);
+      const studentInfoPackage = {
+        firstName,
+        lastName,
+        email,
+      };
 
-      // Clear state/form
-      setStudentInfo({
-        firstName: "",
-        lastName: "",
-        email: "",
-      });
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      addStudent(studentInfoPackage)
     } catch (error) {
       alert("Error adding student. Please try again.");
     }
@@ -43,8 +47,8 @@ const NewStudentForm = (props) => {
           required
           type="text"
           name="firstName"
-          value={studentInfo.firstName}
-          onChange={handleChange}
+          value={firstName}
+          onChange={handleFirstNameChange}
         />
       </label>
 
@@ -54,8 +58,8 @@ const NewStudentForm = (props) => {
           required
           type="text"
           name="lastName"
-          value={studentInfo.lastName}
-          onChange={handleChange}
+          value={lastName}
+          onChange={handleLastNameChange}
         />
       </label>
 
@@ -65,8 +69,8 @@ const NewStudentForm = (props) => {
           required
           type="email"
           name="email"
-          value={studentInfo.email}
-          onChange={handleChange}
+          value={email}
+          onChange={handleEmailChange}
         />
       </label>
 
