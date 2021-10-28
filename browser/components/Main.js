@@ -17,7 +17,7 @@ const Main = (props) => {
 
   useEffect(() => {
     dispatch(fetchStudents());
-  }, []);
+  }, [dispatch]);
 
   const selectStudent = (student) => {
     dispatch(studentSelected(student));
