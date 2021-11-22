@@ -1,4 +1,6 @@
-# Study Saturdays: Week 4 - Fullstack Flow
+# Study Saturdays: Week 5 - Fullstack Flow
+
+## Lecture Slides: [Study-Saturday-Fullstack](https://docs.google.com/presentation/d/1HqPEArZWmkBqjLHm_cLUQyRisEyEJxpRfbG-iatEYLs/edit?usp=sharing)
 
 ## **Objective:** Build a form to add new students to our app
 - [ ] **Cycle 0:** Create a route for adding students
